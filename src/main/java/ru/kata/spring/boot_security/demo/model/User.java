@@ -23,9 +23,6 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "surName")
-    private String surName;
-
     @Column(name = "email")
     private String email;
 
