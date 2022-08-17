@@ -5,5 +5,20 @@
 </head>
 <body>
 <h1>Admin, welcome spring boot security page!</h1>
+<div th:each="user : ${allUsers}">
+    <a th:text="${user.getName()}">user</a>
+    <br>
+    <a th:href="@{admin/editPage/{id}(id=${user.id})}">Edit</a>
+    <form th:method="DELETE" th:action="@{/admin/{id}(id=${user.getId()})}">
+        <input type="submit" value="Delete"/>
+    </form>
+    <br>
+</div>
+<br>
+<a th:href="@{/admin/createPage}">Create new user</a>
+<br>
+<br>
+<a th:href="@{/logout}">logout</a>
+<br>
 </body>
 </html>
