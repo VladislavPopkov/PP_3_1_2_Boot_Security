@@ -11,7 +11,6 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
@@ -25,12 +24,12 @@ public class UserService implements UserDetailsService {
     }
 
     public User findByName(String username) {
-        return userRepository.findByName(username);
+        return userRepository.findByFirstName(username);
     }
 
-
     public User save(User user) {
-        return userRepository.save(user);
+        userRepository.save(user);
+        return user;
     }
 
     public List<User> userList() {
@@ -49,10 +48,10 @@ public class UserService implements UserDetailsService {
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByName(username);
+        User user = userRepository.findByFirstName(username);
         if(user == null) {
             throw new UsernameNotFoundException(String.format("User %s not found ", username));
         }
-        return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(), user.getAuthorities());
+        return new org.springframework.security.core.userdetails.User(user.getFirstName(), user.getPassword(), user.getAuthorities());
     }
 }

@@ -9,7 +9,7 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 
 import java.security.Principal;
 import java.sql.SQLException;
-import java.util.Optional;
+
 
 @Controller
 public class MainController {
@@ -51,7 +51,7 @@ public class MainController {
     }
 
     @PostMapping("/admin/createPage")
-    public String create(User user) throws SQLException {
+    public String create(User user) {
         userService.save(user);
         return "redirect:/admin";
     }

@@ -14,21 +14,23 @@ public class Role implements GrantedAuthority {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "role")
+    private String role;
 
-    public Role(String name) {
-        this.name = name;
+    public Role(String role) {
+        this.role = role;
     }
 
     public Role() {
-
     }
     @ManyToMany(mappedBy = "roles")
     private List<User> users;
 
     @Override
     public String getAuthority() {
-        return name;
+        return getRole();
+    }
+    public void setAuthority(String role) {
+        this.role = role;
     }
 }
