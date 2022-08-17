@@ -7,9 +7,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
+import java.util.Collections;
 import java.util.List;
 
 
@@ -28,8 +30,8 @@ public class UserService implements UserDetailsService {
     }
 
     public User save(User user) {
-        userRepository.save(user);
-        return user;
+        user.setRoles(Collections.singleton(new Role("ROLE_USER")));
+        return userRepository.save(user);
     }
 
     public List<User> userList() {
