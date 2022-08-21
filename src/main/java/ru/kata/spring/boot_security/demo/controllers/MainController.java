@@ -64,7 +64,7 @@ public class MainController {
 
     @PostMapping("/admin/editPage")
     public String update(User user) throws SQLException {
-        userService.save(user);
+        userService.update(user);
         return "redirect:/admin";
     }
 
